@@ -19,12 +19,18 @@
     <main>
         <section class="hero">
             <div class="hero-content">
+                <div class="profile-picture-container">
+                    <img src="images/profile.jpg" alt="Zabiilane" class="profile-picture" id="profilePic">
+                    <div class="profile-placeholder" id="profilePlaceholder">
+                        <span>Add your photo</span>
+                    </div>
+                </div>
                 <h2 class="hello">Hello, World!</h2>
                 <div class="animated-text">
                     <h3>I'm</h3>
-                    <h1 class="name">Zabiilane</h1>
+                    <h1 class="name">Elizabeth Jacaban</h1>
                 </div>
-                <h3 class="here-to">Here to</h3>
+                <h3 class="here-to">Here to <span class="rotating-text" id="rotatingText">Code</span></h3>
                 <div class="cta-buttons">
                     <a href="about.html" class="btn">Learn More</a>
                     <a href="contact.html" class="btn">Get In Touch</a>
@@ -34,9 +40,50 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Zabiilane. All rights reserved.</p>
+        <p>&copy; 2024 Elizabeth Jacaban. All rights reserved.</p>
         <a href="https://github.com/Zabiilane" target="_blank" class="github-link">GitHub</a>
     </footer>
+
+    <script>
+        // Rotating text effect
+        const words = ['Code', 'Create', 'Build', 'Design', 'Develop', 'Innovate'];
+        let currentWordIndex = 0;
+        const rotatingText = document.getElementById('rotatingText');
+        
+        function rotateText() {
+            rotatingText.style.opacity = '0';
+            setTimeout(() => {
+                currentWordIndex = (currentWordIndex + 1) % words.length;
+                rotatingText.textContent = words[currentWordIndex];
+                rotatingText.style.opacity = '1';
+            }, 300);
+        }
+        
+        // Start rotating after initial delay
+        setTimeout(() => {
+            setInterval(rotateText, 2000);
+        }, 2000);
+
+        // Profile picture handling
+        const profilePic = document.getElementById('profilePic');
+        const profilePlaceholder = document.getElementById('profilePlaceholder');
+        
+        profilePic.onerror = function() {
+            this.style.display = 'none';
+            profilePlaceholder.style.display = 'flex';
+        };
+        
+        profilePic.onload = function() {
+            this.style.display = 'block';
+            profilePlaceholder.style.display = 'none';
+        };
+        
+        // Check if image exists on load
+        if (profilePic.complete && profilePic.naturalHeight === 0) {
+            profilePic.style.display = 'none';
+            profilePlaceholder.style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
 
